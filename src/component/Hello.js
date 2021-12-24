@@ -3,23 +3,31 @@
 // };
 
 // export default Hello;
-import World from './World';
-import styles from './Hello.module.css';
+
 // css : 인라인 스타일, index.css&app.css 사용
+
 export default function Hello() {
+
+    const showName = () => {
+        console.log('Mike');
+    }
+
+    const showAge = (age) => {
+        console.log(age);
+    }
+
+    const showText = (e) => {
+        console.log(e.target.value);
+    }
+
     return (
         <>
-            <h1
-                style={{
-                    color: '#f00',
-                    borderRight: '12px solid #000',
-                    marginBottom: '-5px',
-                    opacity: 0.5,
-                }}
-            >
+            <h1>
                 Hello
             </h1>
-            <div className={styles.box}>Hello</div>
+            <button onClick={showName}>Show name</button>
+            <button onClick={showAge(28)}>Show age</button>
+            <input type="text" onChange={showText} />
         </>
     );
 }
