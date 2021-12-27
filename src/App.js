@@ -2,15 +2,18 @@ import "./App.css";
 import Hello from "./component/Hello";
 import Welcome from "./component/Welcome";
 import styles from "./App.module.css";
+import Header from "./component/Header";
+import DayList from "./component/DayList";
+import Day from "./component/Day";
 
 function App() {
   return (
     <>
-      <h3>props: properties</h3>
-      <Hello age={10} />
-      <Hello age={20} />
-      <Hello age={30} />
-      <div className={styles.box}>App</div>
+      <div className="App">
+        <Header />
+        <DayList />
+        <Day />
+      </div>
     </>
   );
 }
