@@ -1,21 +1,28 @@
-import dummy from "../db/data.json";
+import React, { useEffect, useState } from 'react';
 import { usePrams } from 'react-router-dom';
 import Word from './Word';
 
 export default function Day() {
-  const day = usePrams().day;
-  // const { day } = usePrams();
-  const wordList = dummy.words.filter((word) => word.day === Number(day));
+  // const day = usePrams().day;
+  const { day } = usePrams();
+  const [words, setWords] = useState([]);
 
-  const a = usePrams();
-  console.log(a);
+  useEffect(() => {
+    fetch(`http://localhost:3001/words?day=${day}`)
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        setDays(data);
+      })
+  }, [day]);
 
   return (
     <>
       <h2>Day {day}</h2>
       <table>
         <tbody>
-          {wordList.map((word) => {
+          {words.map((word) => {
             <Word word={word} key={word.id} />
           })}
         </tbody>
