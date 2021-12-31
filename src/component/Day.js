@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { usePrams } from 'react-router-dom';
+import useFetch from '../hooks/userFetch';
 import Word from './Word';
 
 export default function Day() {
   // const day = usePrams().day;
   const { day } = usePrams();
-  const [words, setWords] = useState([]);
+  //const [words, setWords] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://localhost:3001/words?day=${day}`)
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        setDays(data);
-      })
-  }, [day]);
+  //useEffect(() => {
+  //  fetch(`http://localhost:3001/words?day=${day}`)
+  //    .then(res => {
+  //      return res.json()
+  //    })
+  //    .then(data => {
+  //      setDays(data);
+  //    })
+  //}, [day]);
+
+  const words = useFetch(`http://localhost:3001/words?day=${day}`)
 
   return (
     <>
