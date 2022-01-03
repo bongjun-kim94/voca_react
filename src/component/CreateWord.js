@@ -1,20 +1,36 @@
+import { useRef } from 'react';
+import useFecth from "../hooks/userFetch";
+
 export default function CreateWord() {
+    const days = useFetch("http://localhost:3001/days");
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    const engRef = useRef(null);
+    const korRef = useRef(null);
+    const dayRef = useRef(null);
+
     return (
         <>
-            <form>
+            <form onSubmit={onSubmit}>
                 <div className="input_area">
                     <label>Eng</label>
-                    <input type="text" placeholder="computer" />
+                    <input type="text" placeholder="computer" reg={engRef} />
                 </div>
                 <div className="input_area">
                     <label>Kor</label>
-                    <input type="text" placeholder="컴퓨터" />
+                    <input type="text" placeholder="컴퓨터" ref={korRef} />
                 </div>
                 <div className="input_area">
                     <label>Day</label>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
+                    <select ref={dayRef}>
+                        {days.map(day => (
+                            <option key={day.id} value={day.day}>
+                                {day.day}
+                            </option>
+                        ))}
                     </select>
                 </div>
                 <div className="input_area"></div>
