@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function useFetch() {
+export default function useFetch(url: string) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -9,7 +9,7 @@ export default function useFetch() {
                 return res.json()
             })
             .then(data => {
-                setDays(data);
+                setData(data);
             })
     }, [url]);
 

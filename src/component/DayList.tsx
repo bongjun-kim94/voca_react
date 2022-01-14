@@ -1,10 +1,21 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import dummy from "../db/data.json";
-import useFetch from '../hooks/userFetch';
+import useFetch from '../hooks/useFetch';
+
+export interface IDay {
+  id: number
+  day: number
+}
 
 export default function DayList() {
-  useFetch('http://localhost:3001/days');
+  const days: IDay[] = useFetch('http://localhost:3001/days');
+  
+
+  if (days.length === 0) {
+    return <span>Loading...</span>
+  }
+
   //const [days, setDays] = useState([]);
   //const [count, setCount] = useState(0);
 
@@ -27,7 +38,6 @@ export default function DayList() {
           </li>
         ))}
       </ul>
-      <button onClick={onClick2}></button>
     </>
   );
 }

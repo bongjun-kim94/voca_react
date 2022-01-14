@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 
+interface IProps {
+    word: IWord;
+}
+
+// 여러개의 프로퍼티에 각각 다른값
+export interface IWord {
+    day: string
+    eng: string
+    kor: string
+    isDone: boolean
+    id: number
+}
+
 // props로 넘어온 word를 w라는 새로운 변수로 할당
-export default function Word({ word: w }) {
+export default function Word({ word: w }: IProps) {
     const [word, setWord] = useState(w);
     const [isShow, setIsShow] = useState(false);
     const [isDone, setIsDone] = useState(word.isDone);
@@ -22,12 +35,11 @@ export default function Word({ word: w }) {
             body: JSON.stringify({
                 ...word,
                 isDone: !isDone
+            }).then(res => {
+                if (res.ok) {
+                    setIsDone(!isDone);
+                }
             })
-                .then(res => {
-                    if (res.ok) {
-                        setIsDone(!isDone);
-                    }
-                })
         });
     }
 
@@ -39,7 +51,10 @@ export default function Word({ word: w }) {
             }).then(res => {
                 if (res.ok) {
                     // 삭제가 되면 word.id를 0으로
-                    setWord({ id: 0 })
+                    setWord({ 
+                        ...word,
+                        id: 0
+                    })
                 }
             })
         }
@@ -53,7 +68,7 @@ export default function Word({ word: w }) {
         <>
             <tr className={isDone ? 'off' : ''}>
                 <td>
-                    <input type="checkbox" checked={word.isDone} onChange={toggleDone} />
+                    <input type="checkbox" checked={isDone} onChange={toggleDone} />
                 </td>
                 <td>{word.eng}</td>
                 <td>{isShow && word.kor}</td>

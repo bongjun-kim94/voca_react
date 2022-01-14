@@ -11,7 +11,7 @@ export default function Header() {
           <Link to="/create_word" classNmae="link">
             단어 추가
           </Link>
-          <a href="#x" clssName="link">
+          <a href="/create_day" clssName="link">
             Day 추가
           </a>
         </div>
